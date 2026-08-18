@@ -31,7 +31,8 @@ let leaving = false;
 const audio = new Audio(MUSIC);
 audio.loop = true;
 audio.volume = 0;
-const MUSIC_VOLUME = 0.34;
+const MUSIC_VOLUME = 0.5;
+audio.volume = MUSIC_VOLUME;
 
 function shell(content, controls = '') {
   return `<main class="love-site step-${step}${leaving ? ' is-leaving' : ''}">
@@ -47,7 +48,7 @@ function postcard(inner, extra = '') { return `<section class="postcard page-ent
 function button(text, action, cls = 'primary-button', icon = '→') { return `<button class="${cls}" data-action="${action}">${text} <span>${icon}</span></button>`; }
 
 function render() {
-  const musicControl = MUSIC && step !== 'lock' ? `<button class="music-toggle${musicPlaying ? ' is-playing' : ''}" data-action="music" aria-label="${musicPlaying ? 'Pause' : 'Play'} background music">${musicPlaying ? 'Ⅱ' : '▶'} <span>♫</span><b>${musicPlaying ? 'playing softly' : 'music'}</b></button>` : '';
+  const musicControl = MUSIC ? `<button class="music-toggle${musicPlaying ? ' is-playing' : ''}" data-action="music" aria-label="${musicPlaying ? 'Pause' : 'Play'} background music">${musicPlaying ? 'Ⅱ' : '▶'} <span>♫</span><b>${musicPlaying ? 'music playing' : 'play music'}</b></button>` : '';
   let content = '';
   if (step === 'lock') content = postcard(`<div class="birthday-opening">Happy Birthday, My Love</div><div class="margin-note note-top">open gently · keep forever</div><div class="stamp">▣ private</div><img class="postcard-seal" src="${SEAL}" alt="Rose-petal heart seal"><p class="eyebrow">a little secret, sealed with love</p><h1>There is something<br><em>special</em> for you.</h1><div class="card-divider"><span>♥</span></div><p class="lede">A tiny birthday world made for one very loved girl.</p>${button('open this little page', 'open')}<p class="fine-print">please open with your softest smile</p><div class="margin-note note-bottom">for you, and only you</div>`, 'lock-card');
   if (step === 'loading') content = postcard(`<div class="loading-art"><img src="${CELEBRATION}" alt="A ribbon and flowers on a birthday postcard"></div><p class="eyebrow">untying the ribbon</p><h2>Loading something<br><em>special…</em></h2><div class="progress-shell"><div class="progress-fill" id="progress-fill"></div></div><div class="progress-meta"><span>just for you, bby</span><span id="progress-label">0%</span></div>`, 'loading-card');
@@ -73,8 +74,22 @@ function handle(action) {
   if (action === 'restart') { balloonsShown = false; wishMade = false; go('lock'); return; }
   go(action);
 }
-function startMusic() { audio.play().then(() => { let volume = audio.volume; const timer = setInterval(() => { volume = Math.min(MUSIC_VOLUME, volume + .025); audio.volume = volume; if (volume >= MUSIC_VOLUME) clearInterval(timer); }, 70); musicPlaying = true; render(); }).catch(() => { musicPlaying = false; render(); }); }
-function fadeMusicOut() { const timer = setInterval(() => { audio.volume = Math.max(0, audio.volume - .04); if (audio.volume <= 0) { clearInterval(timer); audio.pause(); musicPlaying = false; render(); } }, 60); }
+function startMusic() {
+  audio.volume = MUSIC_VOLUME;
+  audio.play().then(() => {
+    musicPlaying = true;
+    render();
+  }).catch((err) => {
+    console.warn("Music play error:", err);
+    musicPlaying = false;
+    render();
+  });
+}
+function fadeMusicOut() {
+  audio.pause();
+  musicPlaying = false;
+  render();
+}
 function go(next) { if (leaving || next === step) return; leaving = true; render(); window.setTimeout(() => { step = next; leaving = false; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }, 620); }
 function startLoading() { clearInterval(loadingTimer); let progress = 0; loadingTimer = setInterval(() => { progress = Math.min(100, progress + 2); const fill = document.querySelector('#progress-fill'); const label = document.querySelector('#progress-label'); if (fill) fill.style.width = `${progress}%`; if (label) label.textContent = `${progress}%`; if (progress >= 100) { clearInterval(loadingTimer); setTimeout(() => go('reveal'), 380); } }, 56); }
 

@@ -2,24 +2,24 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, ChevronLeft, Heart, LockKeyhole, Pause, Play, RotateCcw, Sparkles, Stars, Volume2 } from "lucide-react";
 
-const PORTRAIT = "/manus-storage/1000156805_567063a1.jpg";
-const COUPLE = "/manus-storage/couple-placeholder_c3d5cec3.png";
-const CELEBRATION = "/manus-storage/rosewater-celebration_e03ec998.png";
-const SEAL = "/manus-storage/heart-seal_57bfe810.png";
-// User-provided birthday song. Playback begins after the first open-button click.
-const MUSIC = "/manus-storage/happybirthdayAndy_a4de74ca.mp3";
+import MUSIC from "@assets/happybirthdayAndy.mp3";
+import PORTRAIT from "@assets/1000156805.jpg";
+import COUPLE from "@assets/1000156843.jpg";
+import CELEBRATION from "@assets/rosewater-celebration.png";
+import SEAL from "@assets/heart-seal.png";
+import photo0 from "@assets/1000156805.jpg";
+import photo1 from "@assets/1000156804.jpg";
+import photo2 from "@assets/1000156803.jpg";
+import photo3 from "@assets/1000156802.jpg";
+import photo4 from "@assets/1000156801.jpg";
+import photo5 from "@assets/1000156800.jpg";
+import photo6 from "@assets/1000156799.jpg";
+import photo7 from "@assets/1000156798.jpg";
+import photo8 from "@assets/1000156797.jpg";
+import photo9 from "@assets/1000156796.jpg";
 
 const memoryPhotos = [
-  "/manus-storage/1000156805_567063a1.jpg",
-  "/manus-storage/1000156804_b016c3b3.jpg",
-  "/manus-storage/1000156803_6fc43ee1.jpg",
-  "/manus-storage/1000156802_35047133.jpg",
-  "/manus-storage/1000156801_d217170f.jpg",
-  "/manus-storage/1000156800_f7a9379b.jpg",
-  "/manus-storage/1000156799_5c3294eb.jpg",
-  "/manus-storage/1000156798_0233a285.jpg",
-  "/manus-storage/1000156797_0882a3f6.jpg",
-  "/manus-storage/1000156796_ed2c6ef4.jpg",
+  photo0, photo1, photo2, photo3, photo4, photo5, photo6, photo7, photo8, photo9
 ];
 
 const memories = memoryPhotos.map((src, index) => ({
