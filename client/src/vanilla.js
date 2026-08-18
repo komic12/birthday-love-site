@@ -1,16 +1,23 @@
 /* Pure frontend birthday experience: no React, no backend, just HTML, CSS, and JavaScript. */
 const app = document.querySelector('#app');
-const MUSIC = '../assets/happybirthdayAndy.mp3';
-const PORTRAIT = '../assets/1000156805.jpg';
-const COUPLE = '../assets/1000156843.jpg';
-const CELEBRATION = '../assets/rosewater-celebration.png';
-const SEAL = '../assets/heart-seal.png';
+import MUSIC from '../assets/happybirthdayAndy.mp3';
+import PORTRAIT from '../assets/1000156805.jpg';
+import COUPLE from '../assets/1000156843.jpg';
+import CELEBRATION from '../assets/rosewater-celebration.png';
+import SEAL from '../assets/heart-seal.png';
+import photo0 from '../assets/1000156805.jpg';
+import photo1 from '../assets/1000156804.jpg';
+import photo2 from '../assets/1000156803.jpg';
+import photo3 from '../assets/1000156802.jpg';
+import photo4 from '../assets/1000156801.jpg';
+import photo5 from '../assets/1000156800.jpg';
+import photo6 from '../assets/1000156799.jpg';
+import photo7 from '../assets/1000156798.jpg';
+import photo8 from '../assets/1000156797.jpg';
+import photo9 from '../assets/1000156796.jpg';
+
 const photos = [
-  '../assets/1000156805.jpg', '../assets/1000156804.jpg',
-  '../assets/1000156803.jpg', '../assets/1000156802.jpg',
-  '../assets/1000156801.jpg', '../assets/1000156800.jpg',
-  '../assets/1000156799.jpg', '../assets/1000156798.jpg',
-  '../assets/1000156797.jpg', '../assets/1000156796.jpg'
+  photo0, photo1, photo2, photo3, photo4, photo5, photo6, photo7, photo8, photo9
 ];
 const labels = ['your beautiful smile', 'a little moment of you', 'my favorite face', 'the sweetest memory', 'you being you', 'one for the scrapbook'];
 const rotations = [-3, 2, -1, 3, -2, 1];
